@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  
+  br
+  br
+  .container 
+    .row
+      .col-xs-6
+        h4 Choose a #{__('Data Source')}
+        hr
+        a(href='#')
+          .card(class = "card text-left")
+            .row
+              .col-xs-4
+                img(src="/images/nyt.png")
+              .col-xs-8(style = 'margin-top:5px')
+                .card-body
+                  p New York Times Articles
+                  p(class="small") Choose from a list of NYT categories:  World,  U.S., Politics, N.Y., Business, Opinion.
+
+        a(href='#')
+          .card(class = "card text-left")
+            .row
+              .col-xs-4
+                img(src="/images/ws.jpg")
+              .col-xs-8(style = 'margin-top:5px')
+                .card-body
+                  p Shakespeare Play
+                  p(class="small") Choose from a list of most-quoted lines from Shakespeare play:  Hamlet, Macbeth, A Midsummer Night's Dream.
+      
+      .col-xs-6
+        h4 Or Input #{__('here')}
+        hr
+        .well#well1
+          form.form-horizontal
+
+            .form-group
+              label.col-sm-2.control-label(for='data') #{__('Data')}:
+              .col-sm-10
+                textarea#data.form-control(rows='5', onkeyup='$("#hash").val(sha256())')
+
+            .form-group
+              label.col-sm-2.control-label(for='hash') #{__('Hash')}:
+              .col-sm-10
+                input#hash.form-control(type='text', disabled)
+  center
+    .button(class = "btn btn-primary") Save
+
+  .container 
+    .row
+      .col-xs-6
+        h4 Hash #{__('History')}
+        hr
+        p.small Press the save button to save the hash results.
+
+  script.
+    function getText(block, chain) {
+      return $('#data').val();
+    }
+
+    $("#hash").val(sha256());
