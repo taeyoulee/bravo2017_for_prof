@@ -16,6 +16,7 @@ html
     link(rel='stylesheet', href='/stylesheets/lib/ladda-themeless.min.css')
     link(rel='stylesheet', href='/stylesheets/lib/ie10-viewport-bug-workaround.css')
     link(rel='stylesheet', href='/stylesheets/blockchain.css')
+    link(rel='stylesheet', href='/stylesheets/main.077765e5.css')
 
     script(src='/javascripts/lib/jquery.min.js')
     script(src='/javascripts/lib/bootstrap.min.js')
@@ -24,9 +25,10 @@ html
     script(src='/javascripts/lib/ie10-viewport-bug-workaround.js')
     script(src='/javascripts/lib/sha256.js')
     script(src='/javascripts/blockchain.js')
-
+    
   body
-    nav.navbar.navbar-default.navbar-fixed-top
+    
+    nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -43,7 +45,7 @@ html
               a(href='/block') #{__('Block')}
             li(class={active: page === 'blockchain'})
               a(href='/blockchain') #{__('Blockchain')}
-            li(class={active: page === 'distributed'})
+            //li(class={active: page === 'distributed'})
               a(href='/distributed') #{__('Distributed')}
             li(class={active: page === 'tokens'})
               a(href='/tokens') #{__('Tokens')}

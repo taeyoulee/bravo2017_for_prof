@@ -21,5 +21,9 @@
 	"Data Source": "Data Source",
 	"here": "here",
 	"History": "History",
-	"block": "block"
+	"block": "block",
+	"Difficulty": "Difficulty",
+	"+ Add New Block": "+ Add New Block",
+	"New Block": "New Block",
+	"Add New Block": "Add New Block"
 }

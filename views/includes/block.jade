@@ -6,17 +6,22 @@
       .col-sm-10
         .input-group
           span.input-group-addon #
-          input.form-control(id='block#{block.block}chain#{block.chain}number', type='text', value='#{block.block}' onkeyup='updateChain(#{block.block}, #{block.chain});')
+          input.form-control(id='block#{block.block}chain#{block.chain}number', type='text', value='#{block.block}' onkeyup='updateChain(#{block.block}, #{block.chain});', disabled)
+    
+    .form-group
+      label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}data') #{__('Data')}:
+      .col-sm-10
+        textarea.form-control(id='block#{block.block}chain#{block.chain}data', onkeyup='updateChain(#{block.block}, #{block.chain});')
 
     .form-group
       label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}nonce') #{__('Nonce')}:
       .col-sm-10
          input.form-control(id='block#{block.block}chain#{block.chain}nonce', type='text', value='#{block.nonce}', onkeyup='updateChain(#{block.block}, #{block.chain});')
-
+    
     .form-group
-      label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}data') #{__('Data')}:
+      label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}difficulty') #{__('Difficulty')}:
       .col-sm-10
-        textarea.form-control(id='block#{block.block}chain#{block.chain}data', rows='10', onkeyup='updateChain(#{block.block}, #{block.chain});')
+         input.form-control(id='block#{block.block}chain#{block.chain}difficulty', type='text', value='#{block.difficulty}', onkeyup='updateChain(#{block.block}, #{block.chain});')
 
     #state.form-group
       label.col-sm-2.control-label(for='block#{block.block}chain#{block.chain}previous') #{__('Prev')}:
@@ -29,8 +34,8 @@
         input.form-control(id='block#{block.block}chain#{block.chain}hash', type='text', disabled)
 
     .form-group
-      .col-sm-2
+      .col-sm-1
         i.icon-spinner.icon-spin.icon-large
-      .col-sm-10
+      .col-sm-11
         button.btn.btn-primary.ladda-button(id='block#{block.block}chain#{block.chain}mineButton', data-style='expand-right')
           span.ladda-label #{__('Mine')}

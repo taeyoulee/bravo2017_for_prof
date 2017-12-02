@@ -1,0 +1,117 @@
+extends layout
+
+block content
+  br
+  br
+  .container
+    center
+      h4 Let's build a #{__('block')}
+      hr
+      .well#block1chain1well
+        form.form-horizontal
+
+          .form-group
+            label.col-sm-2.control-label(for='block1chain1number') #{__('Block')}:
+            .col-sm-10
+              .input-group
+                span.input-group-addon #
+                input#block1chain1number.form-control(type='text', value='0' onkeyup='updateHash(1, 1);')
+
+          .form-group
+            label.col-sm-2.control-label(for='block1chain1data') #{__('Data')}:
+            .col-sm-10
+              textarea#block1chain1data.form-control(onkeyup='updateHash(1, 1);')
+
+          .form-group 
+            label.col-sm-2.control-label(for='block1chain1nonce') #{__('Nonce')}:
+            .col-sm-10
+               input#block1chain1nonce.form-control(type='text', value='563', onkeyup='updateHash(1, 1);')
+          
+          .form-group
+            label.col-sm-2.control-label(for='block1chain1difficulty') #{__('Difficulty')}:
+            .col-sm-10
+               input#block1chain1difficulty.form-control(type='text', value='2', onkeyup='updateHash(1, 1);')
+
+          #state.form-group
+            label.col-sm-2.control-label(for='block1chain1prev') #{__('Prev')}:
+            .col-sm-10
+              input#block1chain1prev.form-control(type='text', value = '0000000000000000000000000000000000000000000000000000000000000000', disabled)
+
+          #state.form-group
+            label.col-sm-2.control-label(for='block1chain1hash') #{__('Hash')}:
+            .col-sm-10
+              input#block1chain1hash.form-control(type='text', disabled)
+
+          .form-group
+            .col-sm-2
+              i.icon-spinner.icon-spin.icon-large
+            .col-sm-4
+              button#block1chain1mineButton.btn.btn-primary.ladda-button(data-style='expand-right')
+                span.ladda-label #{__('Mine')}
+            .col-sm-4
+              button#addButton.btn.btn-default.glyphicon.glyphicon-plus
+                #{__('Block')}
+                
+    <ul id="hash-list" class="list-unstyled hash-text"></ul>
+
+  script.
+    $(function() {
+      mineButtonAnimation(1, 1);
+      updateHash(1, 1);
+    });
+
+    $("#addButton").click(function(e) {
+      e.preventDefault();
+      var li = document.createElement("li");
+      
+      collapseId = "collapse" + Date.now();
+
+      var collapsedDiv = document.createElement("div");
+      collapsedDiv.className += " collapse";
+      collapsedDiv.setAttribute("id", collapseId);
+      
+      var inputWell = document.createElement("div");
+      inputWell.className += "well input-well";
+
+      var inputArea = document.createElement("textarea");
+      inputArea.className="form-control";
+      inputArea.setAttribute("disabled", true);
+      inputArea.setAttribute("rows",10);
+      inputArea.value = $("#data").val();
+
+      inputWell.appendChild(inputArea);
+
+      collapsedDiv.appendChild(inputWell);
+
+      li.setAttribute("data-toggle", "collapse");
+      li.setAttribute("data-target", "#" + collapseId);
+      
+      var newHashVal = document.createTextNode($("#hash").val());
+
+      li.appendChild(newHashVal);
+      li.appendChild(collapsedDiv);
+      $("#hash-list").append(li);
+      $(".input-well").click(function(e) {
+        e.stopPropagation();
+      })
+    });
+
+
+    function getText(block, chain) {
+      return $('#block'+block+'chain'+chain+'number').val() +
+             $('#block'+block+'chain'+chain+'data').val() +
+             $('#block'+block+'chain'+chain+'nonce').val()
+             $('#block'+block+'chain'+chain+'difficulty').val();
+    }
+
+    function mineButtonAnimation(block, chain) {
+      $('#block'+block+'chain'+chain+'mineButton').click(function(e) {
+          e.preventDefault();
+          var l = Ladda.create(this);
+          l.start();
+          setTimeout(function() {
+              mine(block, chain, false);
+              l.stop();
+            }, 250); // give UI time to update
+        });
+    }
